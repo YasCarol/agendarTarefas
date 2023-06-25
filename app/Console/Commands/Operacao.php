@@ -12,14 +12,14 @@ class Operacao extends Command
      *
      * @var string
      */
-    protected $signature = 'operacao {operacao}';
+    protected $signature = 'operacao {nome_integracao}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'operacao';
 
     /**
      * Create a new command instance.

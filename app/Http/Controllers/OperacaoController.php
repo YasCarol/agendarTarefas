@@ -18,44 +18,32 @@ class OperacaoController extends Controller
     public function operacoes($operacao)
     {
         try {
-            $operacoes =  Operacao::on('api')
-                ->where('operacao', $operacao)
-                ->where("dias", $this->diaSemana())
-                ->where('ativo', true)
-                ->get();
-            if (isset($operacoes[0])) {
-                foreach ($operacoes as $operacao) {
-                    $op = $operacao['operacao'];
-                    $grupo =  $operacao['grupo_emp'];
-                    switch ($op) {
-                        case "BAIXA_OCORRENCIA":
-                            $resultado[] = $this->baixarOcorrenciaPers($operacao, $grupo);
-                            break;
-                        case "RETORNA_PROTOCOLO":
-                            $resultado[] = $this->retornaProtocolo($operacao, $grupo);
-                            break;
-                        case "RELATORIO_ERROS":
-                            $resultado[] = $this->retornaProtocolo($operacao, $grupo);
-                            break;
-                        default:
-                            throw new Exception("A funcao $op da operacao não está mapeada");
-                    }
-                    if (isset($operacao['min'])) {
-                        $min = $operacao['min'];
-                        $date = new \DateTime(date('Hi'));
-                        $date->add(new \DateInterval("PT" . "$min" . "M"));
-                        $operacao['horas'] = $date->format('H:i');
-                        $operacao->save();
-                    }
-                }
-            } else {
-                $resultado = ['status' => false, 'mensagem' => "Nao ha operacoes para rodar nesse momento"];
+            if (stristr($operacao, 'baixar')) {
+                return $this->enviarRequest('baixar', $operacao);
+            } else if (stristr($operacao, 'clonar')) {
+                return $this->enviarRequest('clonar', $operacao);
             }
         } catch (Throwable $e) {
             $resultado["status"] = false;
             $resultado["mensagem"] = $e->getMessage();
         }
         return $resultado;
+    }
+    public function enviarRequest($tipo, $nome_integracao)
+    {
+        $clientToken = new Client();
+        $urlToken = "http://api.azapfy.com.br/api/integracao/$tipo";
+        $options = array(
+            'headers' => [
+                'content-type' => 'application/json'
+            ],
+            'body' => json_encode([
+                'nome_integracao' => $nome_integracao
+            ]),
+        );
+        $response = $clientToken->request('POST', $urlToken, $options);
+        $result = (json_decode($response->getBody()->getContents()));
+        return (array) $result;
     }
     public function retornaProtocolo()
     {
@@ -199,18 +187,18 @@ class OperacaoController extends Controller
         }
         return $retorno;
     }
-    public function enviarRequest($body, $url, $headers, $metodo)
-    {
-        $clientToken = new Client();
-        $url = $url;
-        $options = array(
-            'headers' => $headers,
-            'body' => json_encode($body),
-        );
-        $response = $clientToken->request($metodo, $url, $options);
-        $result = (json_decode($response->getBody()->getContents()));
-        return $result;
-    }
+    // public function enviarRequest($body, $url, $headers, $metodo)
+    // {
+    //     $clientToken = new Client();
+    //     $url = $url;
+    //     $options = array(
+    //         'headers' => $headers,
+    //         'body' => json_encode($body),
+    //     );
+    //     $response = $clientToken->request($metodo, $url, $options);
+    //     $result = (json_decode($response->getBody()->getContents()));
+    //     return $result;
+    // }
     private function diaSemana()
     {
         switch (date("D")) {

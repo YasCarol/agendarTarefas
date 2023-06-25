@@ -14,7 +14,7 @@ return [
     | you may use many connections at once using the Database library.
     |
     */ 
-    'default' => env('DB_CONNECTION', 'localhost'),
+    'default' => env('DB_CONNECTION', 'homolog'),
 
     /*
     |--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ return [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE', 'admin'),
+            'database' => env('DB_DATABASE', 'yas_teste'),
             //'username' => env('DB_USERNAME', 'elmo'),
             //'password' => env('DB_PASSWORD', 'Azapers@Elmo267'),
             // 'options'  => [

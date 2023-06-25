@@ -2182,25 +2182,25 @@
         },
         {
             "name": "robersonfaria/laravel-database-schedule",
-            "version": "1.3.2",
+            "version": "1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robersonfaria/laravel-database-schedule.git",
-                "reference": "ec2c7e4f0d9c9a7d42712b2f9020a88d947d882c"
+                "reference": "8e6a78836f51473039db34cb2990ea5416dd7ba5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robersonfaria/laravel-database-schedule/zipball/ec2c7e4f0d9c9a7d42712b2f9020a88d947d882c",
-                "reference": "ec2c7e4f0d9c9a7d42712b2f9020a88d947d882c",
+                "url": "https://api.github.com/repos/robersonfaria/laravel-database-schedule/zipball/8e6a78836f51473039db34cb2990ea5416dd7ba5",
+                "reference": "8e6a78836f51473039db34cb2990ea5416dd7ba5",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^5.8|6.*|7.*|8.*|9.*",
+                "laravel/framework": "^5.8|6.*|7.*|8.*|9.*|^10.0",
                 "php": "^7.2|^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^5.20",
-                "phpunit/phpunit": "^8.5",
+                "orchestra/testbench": "^5.20|^8.0",
+                "phpunit/phpunit": "^8.5|^9.5.10",
                 "squizlabs/php_codesniffer": "^3.6"
             },
             "type": "library",
@@ -2235,9 +2235,9 @@
             ],
             "support": {
                 "issues": "https://github.com/robersonfaria/laravel-database-schedule/issues",
-                "source": "https://github.com/robersonfaria/laravel-database-schedule/tree/1.3.2"
+                "source": "https://github.com/robersonfaria/laravel-database-schedule/tree/1.3.3"
             },
-            "time": "2022-03-02T17:32:23+00:00"
+            "time": "2023-02-15T12:23:47+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
